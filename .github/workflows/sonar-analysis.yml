@@ -29,10 +29,14 @@ jobs:
 
     - name: SonarQube begin analysis
       run: |
-        dotnet sonarscanner begin /k:"${{secrets.SONAR_REPOKEY}}" /d:sonar.host.url="http://localhost:9000" /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+        dotnet sonarscanner begin \
+  /o:"deesubainsla" \
+  /k:"Deesubainsla_Dotnet_CRUD_Project" \
+  /d:sonar.host.url="https://sonarcloud.io" \
+  /d:sonar.token="${{secrets.SONAR_TOKEN}}"
 
     - name: Build project
       run: dotnet build
 
     - name: SonarQube end analysis
-      run: dotnet sonarscanner end /d:sonar.login="${{ secrets.SONAR_TOKEN }}"
+      run: dotnet sonarscanner end /d:sonar.token="${{secrets.SONAR_TOKEN}}"
